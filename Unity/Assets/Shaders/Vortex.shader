@@ -42,11 +42,12 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float2 uv = i.uv;
+				float t = _Time * 10.0;
 
 				float2 center = uv - float2(0.5, 0.5);
 				float angle = atan2(center.y, center.x);
 				float radius = length(center);
-				uv = float2(angle / 3.1416 * 4.0, radius);
+				uv = float2(sin(angle * 4.0) * 0.5 + 0.5 + t, radius * 4.0);
 
 				uv = fmod(abs(uv), 1.0);
 
