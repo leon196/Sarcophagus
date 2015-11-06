@@ -33,9 +33,25 @@ public class Zapping : MonoBehaviour
 		foreach (Filter filter in filterList)
 		{
 			Filter newFilter = gameObject.AddComponent(filter.GetType()) as Filter;
-			newFilter.enabled = Random.Range(0f, 100f) > 50f;
+			newFilter.enabled = Random.Range(0f, 1f) < GetChanceFor(newFilter.GetType().ToString());
 			newFilter.Rumble();
 		}
+	}
+
+	float GetChanceFor (string filterName)
+	{
+		float chance = 0.5f;
+		switch (filterName)
+		{
+			case "LSDColor": chance = 0.5f; break;
+			case "EpilepsyColor": chance = 0.1f; break;
+			case "Complex": chance = 0.7f; break;
+			case "RandomLine": chance = 0.5f; break;
+			case "Odyssey": chance = 0.4f; break;
+			case "Vortex": chance = 0.6f; break;
+			default: chance = 0.5f; break;
+		}
+		return chance;
 	}
 
 	void Shuffle ()
