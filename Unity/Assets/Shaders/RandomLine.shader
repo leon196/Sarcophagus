@@ -1,4 +1,4 @@
-Shader "Hidden/OMG"
+Shader "Hidden/RandomLine"
 {
 	Properties
 	{
@@ -40,6 +40,8 @@ Shader "Hidden/OMG"
 			}
 			
 			sampler2D _MainTex;
+			float _ScaleX;
+			float _ScaleY;
 
 			float3 rotateY(float3 v, float t)
 			{
@@ -60,7 +62,10 @@ Shader "Hidden/OMG"
 
 				float2 uv = i.uv;
 
-				fixed4 col = tex2D(_MainTex, snoise(float3(uv * 4.0, t)));
+				uv.x += rand(uv.y + _Time) * _ScaleX - _ScaleX * 0.5;
+				uv.y += rand(uv.x + _Time) * _ScaleY - _ScaleY * 0.5;
+
+				fixed4 col = tex2D(_MainTex, uv);
 
 				return col;
 			}

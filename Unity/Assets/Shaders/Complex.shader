@@ -40,24 +40,21 @@
 			}
 			
 			sampler2D _MainTex;
+			float _Zoom;
+			float _Speed1;
+			float _Speed2;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float t = _Time * 10.0;
 				float osc1 = sin(_Time * 30.0) * 0.5 + 0.5;
-				// float osc2 = sin(_Time * 20.0) * 0.5 + 0.5;
 
 				float2 uv = i.uv * 2.0 - 1.0;
 
-				float2 c1 = complex_div(1.0, uv);
-				// float2 c1 = complex_mul(uv, uv);
+				uv = complex_div(_Zoom - osc1 * _Speed1, uv);
 
-				uv = c1;//lerp(c1, c2, osc2);
-
-				// uv = fmod(abs(uv), 1.0);
-
-				uv.x = kaleido(uv.x, t);
-				uv.y = kaleido(uv.y, t);
+				uv.x = kaleido(uv.x, t * _Speed2);
+				uv.y = kaleido(uv.y, t * _Speed2);
 
 				fixed4 col = tex2D(_MainTex, uv);
 
