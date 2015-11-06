@@ -1,5 +1,9 @@
 noise:
-	gcc -D SEQ=6 -D SPEED=1 -D CYCLEMODE=CONTINUE -o bin/blast blast.c && bin/blast | aplay
+	gcc -D SEQ=0 -D SPEED=2 -D CYCLEMODE=CONTINUE -o bin/blast blast.c && bin/blast | aplay
+	
+	
+concert:
+	gcc -D SEQ=0 -D SPEED=2 -D CYCLEMODE=CONCERT -o bin/blast blast.c && bin/blast | aplay
 	
 	
 file:
