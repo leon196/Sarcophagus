@@ -27,7 +27,7 @@ public class MoveCamera : MonoBehaviour
         myCamera.transform.position = cameraTransforms[currentTransformNumber].transform.position;
         myCamera.transform.rotation = cameraTransforms[currentTransformNumber].transform.rotation;
 
-        StartCoroutine(ReplaceCam());
+        //StartCoroutine(ReplaceCam());
     }
 
     // Update is called once per frame
@@ -44,6 +44,23 @@ public class MoveCamera : MonoBehaviour
             ReplaceCam();
         }
     }
+
+    public void ChangeCamera()
+    {
+        currentTransformNumber++;
+
+        if (currentTransformNumber > maxTransformNumber - 1)
+        {
+            currentTransformNumber = 0;
+        }
+
+        myCamera.transform.position = cameraTransforms[currentTransformNumber].transform.position;
+        myCamera.transform.rotation = cameraTransforms[currentTransformNumber].transform.rotation;
+
+        //currentTransform = cameraTransforms[currentTransformNumber - 1];
+        cooldown = Random.Range(cdMin, cdMax);
+    }
+
 
     IEnumerator ReplaceCam()
     {
