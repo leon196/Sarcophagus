@@ -24,7 +24,7 @@ public class RandomLine : Filter
 
 	override public void Rumble ()
 	{
-		scaleX = Random.Range(0f, 0.2f);
-		scaleY = Random.Range(0f, 0.2f);
+		scaleX = Random.Range(0f, 0.05f);
+		scaleY = Random.Range(0f, 0.05f);
 	}
 }

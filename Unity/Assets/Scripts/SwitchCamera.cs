@@ -5,6 +5,8 @@ public class SwitchCamera : MonoBehaviour {
 
     public int timer = 0;
     public int maxTimer;
+    float timeStart = 0f;
+    float timeDelay = 1f;
 
     public float cooldown;
     public bool loopCamera = true;
@@ -24,7 +26,7 @@ public class SwitchCamera : MonoBehaviour {
         {
             cameras[i].SetActive(false); 
         }
-        StartCoroutine(ReplaceCam());
+        //StartCoroutine(ReplaceCam());
     }
 
     // Update is called once per frame
@@ -38,6 +40,12 @@ public class SwitchCamera : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             ReplaceCam();
+        }
+        if (timeStart + timeDelay < Time.time)
+        {
+            ReplaceCam();
+            timeStart = Time.time;
+            timeDelay = Random.Range(0.01f, 0.5f);
         }
 	}
 
@@ -57,25 +65,19 @@ public class SwitchCamera : MonoBehaviour {
             yield return new WaitForSeconds(cooldown);
     }
 
-    IEnumerator ReplaceCam()
+    void ReplaceCam()
     {
-        while (loopCamera)
+        currentCameraNumber++;
+        if (currentCameraNumber > maxCameraNumber)
         {
-            currentCameraNumber++;
-            if (currentCameraNumber > maxCameraNumber)
-            {
-                currentCameraNumber = 1;
-            }
-            for (int i = maxCameraNumber - 1; i > -1; i--)
-            {
-                cameras[i].SetActive(false);
-            }
-            cameras[currentCameraNumber - 1].SetActive(true);
-
-            currentCamera = cameras[currentCameraNumber - 1];
-            yield return new WaitForSeconds(cooldown);
-            cooldown = Random.Range(0.01f, 0.5f);
+            currentCameraNumber = 1;
         }
-        yield return null;
+        for (int i = maxCameraNumber - 1; i > -1; i--)
+        {
+            cameras[i].SetActive(false);
+        }
+        cameras[currentCameraNumber - 1].SetActive(true);
+
+        currentCamera = cameras[currentCameraNumber - 1];
     }
 }

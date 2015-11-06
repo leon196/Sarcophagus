@@ -2,10 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(AudioSource))]
 public class VideoPlayer : MonoBehaviour
 {
-    string[] videoNameList = new string[] { "TesUnOufToi.ogv", "Sensor2.ogv" };
+    string[] videoNameList = new string[] { "Video_Sarcophagus.ogv" };
     List<MovieTexture> videoList;
  
     void Awake ()
@@ -51,9 +50,8 @@ public class VideoPlayer : MonoBehaviour
 
     void PlayVideo (MovieTexture movieTexture)
     {
-        GetComponent<AudioSource>().clip = movieTexture.audioClip;
-        GetComponent<AudioSource>().Play();
         GetComponent<Renderer>().material.mainTexture = movieTexture;
         movieTexture.Play();
+        Shader.SetGlobalTexture("_VideoTexture", movieTexture);
     }
 }
