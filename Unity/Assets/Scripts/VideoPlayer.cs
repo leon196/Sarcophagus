@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(AudioSource))]
 public class VideoPlayer : MonoBehaviour
 {
-    string[] videoNameList = new string[] { "TesUnOufToi.ogv", "small.ogv" };
+    string[] videoNameList = new string[] { "TesUnOufToi.ogv", "Sensor.ogv" };
     List<MovieTexture> videoList;
  
     void Awake ()
