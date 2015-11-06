@@ -13,7 +13,7 @@ public class Video : MonoBehaviour
  
     protected IEnumerator StartStream ()
     {
-    	string url = "file://" + Application.streamingAssetsPath + "/small.ogv";
+    	string url = "file://" + Application.streamingAssetsPath + "/TesUnOufToi.ogv";
         WWW videoStreamer = new WWW (url);
 
         movieTexture = videoStreamer.movie;

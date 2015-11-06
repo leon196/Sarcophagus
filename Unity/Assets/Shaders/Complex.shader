@@ -16,8 +16,8 @@
 			#pragma fragment frag
 			
 			#include "UnityCG.cginc"
-			#include "Complex.cginc"
-			#include "Utils.cginc"
+			#include "Utils/Complex.cginc"
+			#include "Utils/Helper.cginc"
 
 			struct appdata
 			{
@@ -44,11 +44,15 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float t = _Time * 20.0;
-				float tt = sin(_Time * 10.0) * 0.5 + 0.5;
+				float osc1 = sin(_Time * 30.0) * 0.5 + 0.5;
+				// float osc2 = sin(_Time * 20.0) * 0.5 + 0.5;
 
 				float2 uv = i.uv * 2.0 - 1.0;
 
-				uv = complex_div(tt, uv);
+				float2 c1 = complex_div(osc1 + 0.5, uv);
+				// float2 c2 = complex_mul(uv, uv);
+
+				uv = c1;//lerp(c1, c2, osc2);
 
 				// uv = fmod(abs(uv), 1.0);
 
