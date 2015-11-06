@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Zapping : MonoBehaviour 
+public class EffectZapping : MonoBehaviour 
 {
 	Filter[] filterList;
 
