@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Vortex"
+Shader "Hidden/OMG"
 {
 	Properties
 	{
@@ -16,6 +16,8 @@
 			#pragma fragment frag
 			
 			#include "UnityCG.cginc"
+			#include "Utils/Helper.cginc"
+			#include "Utils/Noise3D.cginc"
 
 			struct appdata
 			{
@@ -39,20 +41,27 @@
 			
 			sampler2D _MainTex;
 
+			float3 rotateY(float3 v, float t)
+			{
+			    float cost = cos(t); float sint = sin(t);
+			    return float3(v.x * cost + v.z * sint, v.y, -v.x * sint + v.z * cost);
+			}
+
+			float3 rotateX(float3 v, float t)
+			{
+			    float cost = cos(t); float sint = sin(t);
+			    return float3(v.x, v.y * cost - v.z * sint, v.y * sint + v.z * cost);
+			}
+
 			fixed4 frag (v2f i) : SV_Target
 			{
+				float t = _Time * 30.0;
+				float osc1 = sin(_Time * 30.0) * 0.5 + 0.5;
+
 				float2 uv = i.uv;
-				float t = _Time * 10.0;
 
-				float2 center = uv - float2(0.5, 0.5);
-				float angle = atan2(center.y, center.x);
-				float radius = length(center);
-				float a = sin(angle * 4.0) * 0.5 + 0.5;
-				uv = float2(a + t, radius);
+				fixed4 col = tex2D(_MainTex, snoise(float3(uv * 4.0, t)));
 
-				uv = fmod(abs(uv), 1.0);
-
-				fixed4 col = tex2D(_MainTex, uv);
 				return col;
 			}
 			ENDCG
