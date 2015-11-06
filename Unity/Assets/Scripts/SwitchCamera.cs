@@ -68,13 +68,10 @@ public class SwitchCamera : MonoBehaviour {
             }
             for (int i = maxCameraNumber - 1; i > -1; i--)
             {
-                //if (i != currentCameraNumber)
-                //{
                 cameras[i].SetActive(false);
-                //}
             }
             cameras[currentCameraNumber - 1].SetActive(true);
-            Debug.Log("change !");
+
             currentCamera = cameras[currentCameraNumber - 1];
             yield return new WaitForSeconds(cooldown);
             cooldown = Random.Range(0.01f, 0.5f);
