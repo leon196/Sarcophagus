@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(AudioSource))]
 public class VideoPlayer : MonoBehaviour
 {
+    string[] videoNameList = new string[] { "TesUnOufToi.ogv", "small.ogv" };
     List<MovieTexture> videoList;
  
     void Awake ()
@@ -23,8 +24,10 @@ public class VideoPlayer : MonoBehaviour
 
     void LoadVideos ()
     {
-        StartCoroutine(StartStream("TesUnOufToi.ogv"));
-        StartCoroutine(StartStream("small.ogv"));
+        foreach (string videoName in videoNameList)
+        {
+            StartCoroutine(StartStream(videoName));
+        }
     }
 
     MovieTexture GetRandomVideo ()
