@@ -12,7 +12,7 @@ main (t)
 {	
 	
 	
-	CycleMode cycleMode = END;
+	CycleMode cycleMode = CYCLEMODE;
 	
 	char* msg = "Yeah";
 
