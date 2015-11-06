@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Complex"
+﻿Shader "Hidden/Vortex"
 {
 	Properties
 	{
@@ -16,8 +16,6 @@
 			#pragma fragment frag
 			
 			#include "UnityCG.cginc"
-			#include "Utils/Complex.cginc"
-			#include "Utils/Helper.cginc"
 
 			struct appdata
 			{
@@ -43,24 +41,16 @@
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				float t = _Time * 10.0;
-				float osc1 = sin(_Time * 30.0) * 0.5 + 0.5;
-				// float osc2 = sin(_Time * 20.0) * 0.5 + 0.5;
+				float2 uv = i.uv;
 
-				float2 uv = i.uv * 2.0 - 1.0;
+				float2 center = uv - float2(0.5, 0.5);
+				float angle = atan2(center.y, center.x);
+				float radius = length(center);
+				uv = float2(angle / 3.1416 * 4.0, radius);
 
-				float2 c1 = complex_div(1.0, uv);
-				// float2 c1 = complex_mul(uv, uv);
-
-				uv = c1;//lerp(c1, c2, osc2);
-
-				// uv = fmod(abs(uv), 1.0);
-
-				uv.x = kaleido(uv.x, t);
-				uv.y = kaleido(uv.y, t);
+				uv = fmod(abs(uv), 1.0);
 
 				fixed4 col = tex2D(_MainTex, uv);
-
 				return col;
 			}
 			ENDCG
