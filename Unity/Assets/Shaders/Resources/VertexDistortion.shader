@@ -4,6 +4,8 @@ Shader "Unlit/VertexDistortion"
       _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader {
+
+      Cull off
       Tags { "RenderType" = "Opaque" }
 
       CGPROGRAM
@@ -16,7 +18,7 @@ Shader "Unlit/VertexDistortion"
 
       void vert (inout appdata_full v) 
       {
-          v.vertex.xyz += v.normal * snoise(v.normal + _Time);
+          v.vertex.xyz += v.normal * snoise(v.normal + float3(v.texcoord.xy, 1.0) + _Time);
       }
 
       sampler2D _MainTex;
