@@ -56,6 +56,15 @@ public class EffectZapping : MonoBehaviour
 		return chance;
 	}
 
+	public void Stop ()
+	{
+		filterList = GetComponentsInChildren<Filter>(true) as Filter[];
+		foreach (Filter filter in filterList)
+		{
+			Destroy(filter);
+		}
+	}
+
 	void Shuffle ()
 	{
 		for (int i = filterList.Length - 1; i > 0; i--)

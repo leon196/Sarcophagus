@@ -10,9 +10,6 @@ public class GameManager : MonoBehaviour {
     public MoveCamera cameraScript;
     public SoundManager soundScript;
     public EffectZapping zapScript;
-
-
-
 	// Use this for initialization
 	void Awake ()
     {
@@ -27,7 +24,14 @@ public class GameManager : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update () 
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            soundScript.enabled = false;
+            Camera.main.transform.position = Vector3.one * 9000f;
+            Camera.main.transform.LookAt(Camera.main.transform.position + Vector3.one);
+            zapScript.Stop();
+        }
 	}
 }

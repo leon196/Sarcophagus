@@ -26,7 +26,6 @@ public class SoundManager : MonoBehaviour {
 
         lastPulse = pulseNumber;
 
-        //if (soundPosition )
         pulseNumber = (int)Mathf.Floor(soundPosition *  8f);
 
         if (pulseNumber != lastPulse)
