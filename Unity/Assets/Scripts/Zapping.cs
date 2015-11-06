@@ -44,8 +44,8 @@ public class Zapping : MonoBehaviour
 		switch (filterName)
 		{
 			case "LSDColor": chance = 0.5f; break;
-			case "EpilepsyColor": chance = 0.1f; break;
-			case "Complex": chance = 0.7f; break;
+			case "EpilepsyColor": chance = 0.8f; break;
+			case "Complex": chance = 0.8f; break;
 			case "RandomLine": chance = 0.5f; break;
 			case "Odyssey": chance = 0.4f; break;
 			case "Vortex": chance = 0.6f; break;
