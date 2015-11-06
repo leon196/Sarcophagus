@@ -45,6 +45,9 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float2 uv = i.uv;
+				uv.x -= 0.5;
+				uv.x *= _ScreenParams.x / _ScreenParams.y;
+				uv.x += 0.5;
 				float t = _Time * _Speed;
 
 				float2 center = uv - float2(0.5, 0.5);

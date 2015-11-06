@@ -36,8 +36,6 @@ public class Zapping : MonoBehaviour
 			newFilter.enabled = Random.Range(0f, 100f) > 50f;
 			newFilter.Rumble();
 		}
-
-		Debug.Log(filterList.Length);
 	}
 
 	void Shuffle ()

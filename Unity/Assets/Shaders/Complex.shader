@@ -50,6 +50,7 @@
 				float osc1 = sin(_Time * 30.0) * 0.5 + 0.5;
 
 				float2 uv = i.uv * 2.0 - 1.0;
+				uv.x *= _ScreenParams.x / _ScreenParams.y;
 
 				uv = complex_div(_Zoom - osc1 * _SpeedZoom, uv);
 
