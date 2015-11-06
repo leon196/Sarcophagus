@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Complex"
+Shader "Hidden/EpilepsyColor"
 {
 	Properties
 	{
@@ -16,7 +16,6 @@
 			#pragma fragment frag
 			
 			#include "UnityCG.cginc"
-			#include "Utils/Complex.cginc"
 			#include "Utils/Helper.cginc"
 
 			struct appdata
@@ -40,23 +39,17 @@
 			}
 			
 			sampler2D _MainTex;
-			float _Zoom;
-			float _SpeedZoom;
-			float _SpeedUV;
+			float _Speed;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				float t = _Time * 10.0;
-				float osc1 = sin(_Time * 30.0) * 0.5 + 0.5;
+				fixed4 col = tex2D(_MainTex, i.uv);
 
-				float2 uv = i.uv * 2.0 - 1.0;
+				float t = _Time * _Speed;
 
-				uv = complex_div(_Zoom - osc1 * _SpeedZoom, uv);
-
-				uv.x = kaleido(uv.x, t * _SpeedUV);
-				uv.y = kaleido(uv.y, t * _SpeedUV);
-
-				fixed4 col = tex2D(_MainTex, uv);
+				col.r = rand(col.gb + float2(t, t));
+				col.g = rand(col.rb + float2(t, t));
+				col.b = rand(col.gr + float2(t, t));
 
 				return col;
 			}

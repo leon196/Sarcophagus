@@ -39,16 +39,18 @@
 			}
 			
 			sampler2D _MainTex;
+			float _Speed;
+			float _ScaleX;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				float t = _Time * 10.0;
+				float t = _Time * _Speed;
 				float2 uv = i.uv * 2.0 - 1.0;
+				uv.x *= _ScaleX;
+				uv.x /= uv.y;
+				uv = fmod(abs(abs(uv) - float2(0, t)), 1.0);
 				uv.x = kaleido(uv.x, 0);
 				uv.y = kaleido(uv.y, 0);
-				uv.x /= uv.y;
-				// uv = fmod(abs(abs(uv) - float2(0, t)), 1.0);
-				uv = fmod(abs(uv), 1.0);
 				fixed4 col = tex2D(_MainTex, uv);
 				return col;
 			}

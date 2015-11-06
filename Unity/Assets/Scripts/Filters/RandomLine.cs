@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 [ExecuteInEditMode]
-public class RandomLine : MonoBehaviour 
+public class RandomLine : Filter 
 {
 	public float scaleX = 0.1f;
 	public float scaleY = 0.1f;
@@ -20,5 +20,11 @@ public class RandomLine : MonoBehaviour
 		material.SetFloat("_ScaleX", scaleX);
 		material.SetFloat("_ScaleY", scaleY);
 		Graphics.Blit (source, destination, material);
+	}
+
+	override public void Rumble ()
+	{
+		scaleX = Random.Range(0f, 0.2f);
+		scaleY = Random.Range(0f, 0.2f);
 	}
 }

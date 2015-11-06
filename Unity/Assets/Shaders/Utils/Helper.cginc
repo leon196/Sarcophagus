@@ -1,4 +1,6 @@
 
+#define PI 3.1415926535897
+
 float kaleido (float x, float t)
 {
     x += t * lerp(-1.0, 1.0, fmod(floor(abs(x)), 2.0));
@@ -10,4 +12,9 @@ float kaleido (float x, float t)
 float rand(float2 co)
 {
   return frac(sin(dot(co.xy ,float2(12.9898,78.233))) * 43758.5453);
+}
+
+float linearOscillator (float x)
+{
+	return 1.0 - abs(fmod(abs(x), 1.0) * 2.0 - 1.0);
 }

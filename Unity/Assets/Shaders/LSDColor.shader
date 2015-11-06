@@ -41,6 +41,7 @@ Shader "Hidden/LSDColor"
 			}
 			
 			sampler2D _MainTex;
+			float _Speed;
 
 			float3 rotateY(float3 v, float t)
 			{
@@ -56,12 +57,14 @@ Shader "Hidden/LSDColor"
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				float t = _Time * 10.0;
+				float t = _Time * _Speed;
 				float osc1 = sin(_Time * 30.0) * 0.5 + 0.5;
 
 				float2 uv = i.uv;
 
 				fixed4 col = tex2D(_MainTex, uv);
+
+				col.rgb = normalize(col.rgb);
 
 				col.rgb = abs(rotateX(col.rgb, t));
 				col.rgb = abs(rotateY(col.rgb, t));

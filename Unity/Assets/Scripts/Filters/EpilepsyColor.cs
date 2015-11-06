@@ -2,15 +2,15 @@ using UnityEngine;
 using System.Collections;
 
 [ExecuteInEditMode]
-public class LSDColor : Filter 
+public class EpilepsyColor : Filter 
 {
-	public float speed = 10f;
+	public float speed = 1f;
 	Material material;
 
 	// Creates a private material used to the effect
 	void Awake ()
 	{
-		material = new Material( Shader.Find("Hidden/LSDColor") );
+		material = new Material( Shader.Find("Hidden/EpilepsyColor") );
 	}
 	
 	// Postprocess the image
@@ -22,6 +22,6 @@ public class LSDColor : Filter
 
 	override public void Rumble ()
 	{
-		speed = Random.Range(10f, 100f);
+		speed = Random.Range(0.001f, 1f);
 	}
 }
