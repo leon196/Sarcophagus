@@ -19,7 +19,7 @@ public class EffectZapping : MonoBehaviour
 		}		
 	}
 
-	void Zap ()
+	public void Zap ()
 	{
 		filterList = GetComponentsInChildren<Filter>(true) as Filter[];
 		
