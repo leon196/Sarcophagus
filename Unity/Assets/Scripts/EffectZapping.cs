@@ -1,22 +1,67 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public class ProgressValue
+{
+	float valueFrom;
+	float valueTo;
+	float progressStart;
+	float progressDelay;
+	float timeStart;
+	public ProgressValue (float from_, float to_, float start_, float delay_)
+	{
+		valueFrom = from_;
+		valueTo = to_;
+		progressStart = start_;
+		progressDelay = delay_;
+	}
+	public void Start ()
+	{
+		timeStart = Time.time;
+	}
+	public float GetRatio ()
+	{
+		return Mathf.Clamp((Time.time - timeStart - progressStart) / progressDelay, 0f, 1f);
+	}
+	public float GetValue ()
+	{
+		return Mathf.Lerp(valueFrom, valueTo, GetRatio());
+	}
+}
+
 public class EffectZapping : MonoBehaviour 
 {
 	Filter[] filterList;
 
+	// Intro video
+	ProgressValue videoProgress = new ProgressValue(1.0f, 0.6f, 0f, 30f);
+
+	// "Chill" FX
+	ProgressValue lsdColorProgress = new ProgressValue(0.0f, 0.4f, 10f, 1f);
+	ProgressValue randomLineProgress = new ProgressValue(0.0f, 0.6f, 15f, 1f);
+	
+	// Geometry transformations
+	ProgressValue complexProgress = new ProgressValue(0.0f, 0.4f, 20f, 1f);
+	ProgressValue odysseyProgress = new ProgressValue(0.0f, 0.3f, 25f, 1f);
+	ProgressValue vortexProgress = new ProgressValue(0.0f, 0.5f, 30f, 1f);
+	
+	// The climax
+	ProgressValue epilepsyColorProgress = new ProgressValue(0.0f, 0.6f, 60f, 1f);
+
+	// Kill screen and retina
+	ProgressValue blankingProgress = new ProgressValue(0.0f, 0.2f, 90f, 1f);
+
 	void Start () 
 	{
 		filterList = GetComponentsInChildren<Filter>(true) as Filter[];
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			Zap();
-		}		
+		videoProgress.Start();
+		lsdColorProgress.Start();
+		randomLineProgress.Start();
+		complexProgress.Start();
+		odysseyProgress.Start();
+		vortexProgress.Start();
+		epilepsyColorProgress.Start();
+		blankingProgress.Start();
 	}
 
 	public void Zap ()
@@ -43,15 +88,15 @@ public class EffectZapping : MonoBehaviour
 		float chance = 0.5f;
 		switch (filterName)
 		{
-			case "LSDColor": chance = 0.5f; break;
-			case "EpilepsyColor": chance = 0.8f; break;
-			case "Complex": chance = 0.6f; break;
-			case "RandomLine": chance = 0.5f; break;
-			case "Odyssey": chance = 0.1f; break;
-			case "Vortex": chance = 0.2f; break;
-			case "Video": chance = 0.7f; break;
-			case "Blanking": chance = 0.2f; break;
-			default: chance = 0.5f; break;
+			case "LSDColor": chance = lsdColorProgress.GetValue(); break;
+			case "EpilepsyColor": chance = epilepsyColorProgress.GetValue(); break;
+			case "Complex": chance = complexProgress.GetValue(); break;
+			case "RandomLine": chance = randomLineProgress.GetValue(); break;
+			case "Odyssey": chance = odysseyProgress.GetValue(); break;
+			case "Vortex": chance = vortexProgress.GetValue(); break;
+			case "Video": chance = videoProgress.GetValue(); break;
+			case "Blanking": chance = blankingProgress.GetValue(); break;
+			default: chance = 0.0f; break;
 		}
 		return chance;
 	}
