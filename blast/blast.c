@@ -1,12 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <sys/types.h>
-#include <string.h>
-
 #define true 1;
 #define false 0;
+
 
 typedef enum {
 	END,
@@ -15,38 +9,10 @@ typedef enum {
 } CycleMode;
 
 main (t)
-{
-	
-	int spatula_count = 3490;
-	char *secret_message = "BEAT";
-
-	int stream_socket, dgram_socket;
-	struct sockaddr_in dest;
-	int temp;
-
-
-	// now with UDP datagram sockets:
-	//getaddrinfo(...
-	dest.sin_family = AF_INET;
-	dest.sin_port = htons(3490);
-	inet_aton("192.168.20.196", &dest.sin_addr.s_addr);
-	dgram_socket = socket(AF_INET, SOCK_DGRAM, 0);
-
-	// send secret message normally:
-	sendto(dgram_socket, secret_message, strlen(secret_message)+1, 0, 
-		   (struct sockaddr*)&dest, sizeof dest);
-
+{	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	CycleMode cycleMode = REPEAT;
+	CycleMode cycleMode = END;
 	
 	char* msg = "Yeah";
 
@@ -59,11 +25,11 @@ main (t)
 	
 	float riser = 3;
 	
-	int skipAt = 1024;
+	int skipAt = 2048/SPEED;
 	
 	int seqPos;
-	int seqCount = 11;
-	int curSeq = 3;
+	int seqCount = 15;
+	int curSeq = SEQ;
 	static int seqSamples = 2048;
 	static int seqLen = 32;
 	static int seq[][32] = (int [][32]){
@@ -77,7 +43,12 @@ main (t)
 		{ 1,8,8,1, 6,8,8,8, 1,8,8,1, 6,5,8,8, 1,8,8,1, 6,8,8,8, 1,2,3,4, 6,5,7,0,},
 		{ 1,0,0,0, 6,0,0,0, 1,0,0,0, 6,0,0,0, 1,0,0,0, 6,0,0,0, 1,0,0,0, 6,0,0,0,},
 		{ 1,8,8,8, 6,8,8,8, 1,8,8,8, 6,8,8,8, 1,8,8,8, 6,8,8,8, 1,8,8,8, 6,8,8,8,},
-		{ 8,8,8,8, 8,8,8,8, 8,8,8,8, 8,8,8,8, 8,8,8,8, 8,8,8,8, 8,8,8,8, 8,8,8,8,}
+		{ 8,8,8,8, 8,8,8,8, 8,8,8,8, 8,8,8,8, 8,8,8,8, 8,8,8,8, 8,8,8,8, 8,8,8,8,},
+		{ 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9,},
+		{ 9,8,11,10, 9,8,11,10, 9,8,11,10, 9,8,11,10, 9,8,11,10, 9,8,11,10, 9,8,11,10, 9,8,11,10,},
+		{ 9,9,9,9, 8,8,8,8, 11,11,11,11, 10,10,10,10, 9,9,9,9, 8,8,8,8, 11,11,11,11, 10,10,10,10,},
+		{ 11,11,11,11, 11,11,11,11, 11,11,11,11, 11,11,11,11, 11,11,11,11, 11,11,11,11, 11,11,11,11, 11,11,11,11,}
+		
 
 	};
 	
@@ -92,6 +63,15 @@ main (t)
 				break;
 			case 8:
 				push = ((19&t>>4)*t*(t%3));
+				break;
+			case 10:
+				push = ((t&t>>2)-2|(19&t>>4)*t*(t%3)+(t/64));
+				break;
+			case 11:
+				push = (t*(t&t>>4)-(t/128));
+				break;
+			case 9:
+				push = (3*t*t+(t%1024>512?20:0));
 				break;
 			case 2:
 				push = ((19&t>>2)*t*(t%8));
@@ -139,8 +119,7 @@ main (t)
 		
 		if (seqPos%2048==0)
 		{
-			sendto(dgram_socket, secret_message, strlen(secret_message)+1, 0, 
-				(struct sockaddr*)&dest, sizeof dest);
+			
 		}
 
 		seqPos++;
