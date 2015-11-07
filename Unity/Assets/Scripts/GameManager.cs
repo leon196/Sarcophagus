@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public MoveCamera cameraScript;
     public SoundManager soundScript;
     public EffectZapping zapScript;
+    VideoPlayer videoPlayer;
 
     public float timePressed = 0;
     public float timeToPress;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour {
         cameraScript = GetComponent<MoveCamera>();
         soundScript = myCamera.GetComponent<SoundManager>();
         zapScript = myCamera.GetComponent<EffectZapping>();
+        videoPlayer = FindObjectOfType<VideoPlayer>();
     }
 	
     void Start()
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour {
                 Camera.main.transform.position = Vector3.one * 9000f;
                 Camera.main.transform.LookAt(Camera.main.transform.position + Vector3.one);
                 zapScript.Stop();
+                myCamera.GetComponent<AudioSource>().enabled = false;
             }
             else
             {
@@ -61,11 +64,13 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKey(KeyCode.LeftControl) && !isStarted)
         {
             timePressed = timePressed + Time.deltaTime;
+            myCamera.GetComponent<AudioSource>().enabled = true;
             soundScript.source.volume = Mathf.Lerp(0.1f, 0.5f, timePressed/timeToPress);
             if (timePressed > timeToPress)
             {
                 isStarted = true;
                 zapScript.BeginGame();
+                videoPlayer.StartVideoForGame();
             }
         }
 	}

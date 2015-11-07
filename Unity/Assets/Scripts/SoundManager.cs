@@ -60,6 +60,13 @@ public class SoundManager : MonoBehaviour
                     soundsLong.RemoveAt(0);
                     if (soundsLong.Count != 0)
                     {
+<<<<<<< HEAD
+=======
+                        try {
+                            Sending.sp.Write("a");
+                        }
+                        catch {}
+>>>>>>> origin/master
                         source.clip = soundsLong[0];
                         source.volume += (source.volume / (soundsLong.Count + soundsShort.Count));
                     }

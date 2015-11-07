@@ -49,7 +49,7 @@ public class EffectZapping : MonoBehaviour
     // Geometry transformations
     ProgressValue complexProgress = new ProgressValue(0.0f, 0.4f, 20f, 1f);
 	ProgressValue odysseyProgress = new ProgressValue(0.0f, 0.3f, 25f, 1f);
-	ProgressValue vortexProgress = new ProgressValue(0.0f, 0.5f, 30f, 1f);
+	ProgressValue vortexProgress = new ProgressValue(0.0f, 0.4f, 30f, 1f);
 	
 	// The climax
 	ProgressValue epilepsyColorProgress = new ProgressValue(0.0f, 0.6f, 60f, 1f);
@@ -78,7 +78,14 @@ public class EffectZapping : MonoBehaviour
 
 	public void Zap ()
 	{
+<<<<<<< HEAD
         Sending.sp.Write("b");
+=======
+		try {
+        	Sending.sp.Write("a");
+        }
+        catch {}
+>>>>>>> origin/master
         filterList = GetComponentsInChildren<Filter>(true) as Filter[];
 		
 		foreach (Filter filter in filterList)
@@ -122,8 +129,8 @@ public class EffectZapping : MonoBehaviour
 		filterList = GetComponentsInChildren<Filter>(true) as Filter[];
 		foreach (Filter filter in filterList)
 		{
-            //Destroy(filter);
-            filter.gameObject.SetActive(false);
+            Destroy(filter);
+            // filter.gameObject.SetActive(false);
 		}
 	}
 
