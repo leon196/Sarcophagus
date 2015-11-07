@@ -58,10 +58,10 @@ public class EffectZapping : MonoBehaviour
 	ProgressValue meshesProgress = new ProgressValue(0.0f, 0.2f, 10f, 1f);
 	
 	// The climax
-	ProgressValue epilepsyColorProgress = new ProgressValue(0.0f, 0.6f, 60f, 1f);
+	ProgressValue epilepsyColorProgress = new ProgressValue(0.0f, 0.5f, 60f, 1f);
 
 	// Kill screen and retina
-	ProgressValue blankingProgress = new ProgressValue(0.0f, 0.5f, 80f, 1f);
+	ProgressValue blankingProgress = new ProgressValue(0.0f, 0.4f, 80f, 1f);
 
 	void Start () 
 	{

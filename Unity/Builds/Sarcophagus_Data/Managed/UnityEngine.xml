@@ -18200,6 +18200,12 @@ GUILayout::ref::MaxHeight, GUILayout::ref::ExpandWidth, GUILayout::ref::ExpandHe
       </summary>
       <param name="lods">The LODs to use for this group.</param>
     </member>
+    <member name="M:UnityEngine.LODGroup.SetLODS(UnityEngine.LOD[])">
+      <summary>
+        <para>Set the LODs for the LOD group. This will remove any existing LODs configured on the LODGroup.</para>
+      </summary>
+      <param name="lods">The LODs to use for this group.</param>
+    </member>
     <member name="T:UnityEngine.LogType">
       <summary>
         <para>The type of the log message in the delegate registered with Application.RegisterLogCallback.</para>
@@ -30636,11 +30642,6 @@ Updating a probe's cubemap is a costly operation. Unity needs to render the enti
     <member name="M:UnityEngine.ScriptableObject.CreateInstance">
       <summary>
         <para>Creates an instance of a scriptable object with /T/.</para>
-      </summary>
-    </member>
-    <member name="T:UnityEngine.Scripting.PreserveAttribute">
-      <summary>
-        <para>PreserveAttribute prevents byte code stripping from removing a class, method, field, or property.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.Security">

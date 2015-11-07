@@ -49,13 +49,14 @@ public class GameManager : MonoBehaviour {
         {
             if (isStarted)
             {
+                Application.LoadLevel(0);
                 //soundScript.enabled = false;
-                isStarted = false;
+                /*isStarted = false;
                 soundScript.Ending();
                 Camera.main.transform.position = Vector3.one * 9000f;
                 Camera.main.transform.LookAt(Camera.main.transform.position + Vector3.one);
                 zapScript.Stop();
-                myCamera.GetComponent<AudioSource>().enabled = false;
+                myCamera.GetComponent<AudioSource>().enabled = false;*/
             }
             else
             {
