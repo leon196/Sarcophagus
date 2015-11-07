@@ -33,15 +33,21 @@ public class EffectZapping : MonoBehaviour
 {
 	Filter[] filterList;
 
-	// Intro video
-	ProgressValue videoProgress = new ProgressValue(1.0f, 0.6f, 0f, 30f);
+    // Intro video
+#if !UNITY_ANDROID
+    ProgressValue videoProgress = new ProgressValue(1.0f, 0.6f, 0f, 30f);
+#endif
 
-	// "Chill" FX
-	ProgressValue lsdColorProgress = new ProgressValue(0.0f, 0.4f, 5f, 1f);
-	ProgressValue randomLineProgress = new ProgressValue(0.0f, 0.6f, 15f, 1f);
-	
-	// Geometry transformations
-	ProgressValue complexProgress = new ProgressValue(0.0f, 0.4f, 20f, 1f);
+    // "Chill" FX
+#if UNITY_ANDROID
+    ProgressValue lsdColorProgress = new ProgressValue(0.0f, 0.4f, 0f, 1f);
+	ProgressValue randomLineProgress = new ProgressValue(0.0f, 0.6f, 10f, 1f);
+#else
+    ProgressValue lsdColorProgress = new ProgressValue(0.0f, 0.4f, 5f, 1f);
+    ProgressValue randomLineProgress = new ProgressValue(0.0f, 0.6f, 15f, 1f);
+#endif
+    // Geometry transformations
+    ProgressValue complexProgress = new ProgressValue(0.0f, 0.4f, 20f, 1f);
 	ProgressValue odysseyProgress = new ProgressValue(0.0f, 0.3f, 25f, 1f);
 	ProgressValue vortexProgress = new ProgressValue(0.0f, 0.5f, 30f, 1f);
 	
@@ -58,7 +64,9 @@ public class EffectZapping : MonoBehaviour
 
     public void BeginGame()
     {
+#if !UNITY_ANDROID
         videoProgress.Start();
+#endif
         lsdColorProgress.Start();
         randomLineProgress.Start();
         complexProgress.Start();
@@ -99,7 +107,9 @@ public class EffectZapping : MonoBehaviour
 			case "RandomLine": chance = randomLineProgress.GetValue(); break;
 			case "Odyssey": chance = odysseyProgress.GetValue(); break;
 			case "Vortex": chance = vortexProgress.GetValue(); break;
-			case "Video": chance = videoProgress.GetValue(); break;
+#if !UNITY_ANDROID
+            case "Video": chance = videoProgress.GetValue(); break;
+#endif
 			case "Blanking": chance = blankingProgress.GetValue(); break;
 			default: chance = 0.0f; break;
 		}

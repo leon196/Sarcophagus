@@ -4,22 +4,25 @@ using System.Collections.Generic;
 
 public class VideoPlayer : MonoBehaviour
 {
+#if !UNITY_ANDROID
     string[] videoNameList = new string[] { "Video_Sarcophagus.ogv" };
-    List<MovieTexture> videoList;
- 
+
+    List<MovieTexture> videoList =  new List<MovieTexture>();
+
     void Awake ()
-    {        
+    {
         videoList = new List<MovieTexture>();
+
         LoadVideos();
     }
 
-    void Update ()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            PlayVideo(GetRandomVideo());
-        }
-    }
+    //void Update ()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.V))
+    //    {
+    //        PlayVideo(GetRandomVideo());
+    //    }
+    //}
 
     void LoadVideos ()
     {
@@ -33,7 +36,7 @@ public class VideoPlayer : MonoBehaviour
     {
         return videoList[Random.Range(0, videoList.Count)];
     }
- 
+
     IEnumerator StartStream (string videoName)
     {
     	string url = "file://" + Application.streamingAssetsPath + "/" + videoName;
@@ -46,7 +49,7 @@ public class VideoPlayer : MonoBehaviour
             yield return 0;
         }
         PlayVideo(movieTexture);
-    }
+}
 
     void PlayVideo (MovieTexture movieTexture)
     {
@@ -54,4 +57,6 @@ public class VideoPlayer : MonoBehaviour
         movieTexture.Play();
         Shader.SetGlobalTexture("_VideoTexture", movieTexture);
     }
+#endif
 }
+

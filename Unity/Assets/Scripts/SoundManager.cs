@@ -8,6 +8,8 @@ public class SoundManager : MonoBehaviour
     public List<AudioClip> soundsShort = new List<AudioClip>();
     public List<AudioClip> soundsLong = new List<AudioClip>();
 
+    public AudioClip endingSound;
+
     public int currentSound;
 
 
@@ -58,6 +60,7 @@ public class SoundManager : MonoBehaviour
                     if (soundsLong.Count != 0)
                     {
                         source.clip = soundsLong[0];
+                        source.volume += (source.volume / (soundsLong.Count + soundsShort.Count));
                     }
                 }
                 if (soundsLong.Count <= 0 && soundsShort.Count > 0)
@@ -66,6 +69,7 @@ public class SoundManager : MonoBehaviour
                     if (soundsShort.Count > 0)
                     {
                         source.clip = soundsShort[0];
+                        source.volume += (source.volume / (soundsLong.Count + soundsShort.Count));
                     }
                 }
                 source.Play();
@@ -73,43 +77,11 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
+
+    public void Ending()
+    {
+        source.Stop();
+        source.clip = endingSound;
+        source.Play();
+    }
 }
-//using UnityEngine;
-//using System.Collections;
-
-//public class SoundManager : MonoBehaviour
-//{
-
-//    public AudioSource source;
-
-//    [Range(0, 1)]
-//    public float soundPosition;
-//    public int pulseNumber;
-
-//    public int lastPulse;
-
-
-//    Use this for initialization
-//    void Start()
-//    {
-//        source = GetComponent<AudioSource>();
-//        source.Play();
-//    }
-
-//    Update is called once per frame
-//    void Update()
-//    {
-//        soundPosition = (float)source.timeSamples / (float)source.clip.samples;
-
-//        lastPulse = pulseNumber;
-
-//        if (soundPosition)
-//            pulseNumber = (int)Mathf.Floor(soundPosition * 8f);
-
-//        if (pulseNumber != lastPulse)
-//        {
-//            GameManager.instance.cameraScript.ChangeCamera();
-//            GameManager.instance.zapScript.Zap();
-//        }
-//    }
-//}

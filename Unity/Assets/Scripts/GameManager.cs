@@ -29,9 +29,12 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyUp(KeyCode.Space))
         {
-            soundScript.enabled = false;
+            //soundScript.enabled = false;
+            isStarted = false;
+            soundScript.Ending();
+            Debug.Log("lol");
             Camera.main.transform.position = Vector3.one * 9000f;
             Camera.main.transform.LookAt(Camera.main.transform.position + Vector3.one);
             zapScript.Stop();
