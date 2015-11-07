@@ -12,7 +12,7 @@ public class Sending : MonoBehaviour {
 
     int cnt = 0;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		OpenConnection();
 	}
 	
@@ -45,6 +45,7 @@ public class Sending : MonoBehaviour {
 
     public static void DoEffect(string msg)
     {
+        Debug.Log(msg);
         try
         {
             sp.Write(msg);
@@ -99,18 +100,5 @@ public class Sending : MonoBehaviour {
     void OnApplicationQuit() 
     {
        sp.Close();
-    }
-
-    public static void sendYellow(){
-    	sp.Write("y");
-    }
-
-    public static void sendGreen(){
-    	sp.Write("g");
-    	//sp.Write("\n");
-    }
-
-    public static void sendRed(){
-    	sp.Write("r");
     }
 }

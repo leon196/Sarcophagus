@@ -77,15 +77,11 @@ public class EffectZapping : MonoBehaviour
     }
 
 	public void Zap ()
-	{
-<<<<<<< HEAD
-        Sending.sp.Write("b");
-=======
-		try {
-        	Sending.sp.Write("a");
-        }
-        catch {}
->>>>>>> origin/master
+    {
+        if (Random.value>0.50f)
+            Sending.DoEffect("t");
+        else
+            Sending.DoEffect("b");
         filterList = GetComponentsInChildren<Filter>(true) as Filter[];
 		
 		foreach (Filter filter in filterList)

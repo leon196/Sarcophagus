@@ -32,12 +32,17 @@ public class GameManager : MonoBehaviour {
 	
     void Start()
     {
-        Sending.DoEffect("a");
+        Sending.DoEffect("n");
     }
 
 	// Update is called once per frame
 	void Update () 
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Application.LoadLevel(0);
+        }
+
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             if (isStarted)
@@ -55,7 +60,7 @@ public class GameManager : MonoBehaviour {
                 timePressed = 0;
                 soundScript.source.volume = 0.1f;
             }
-            Sending.DoEffect("a");
+            Sending.DoEffect("n");
         }
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
