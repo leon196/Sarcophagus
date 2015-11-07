@@ -43,6 +43,15 @@ public class Sending : MonoBehaviour {
         }
 	}
 
+    public static void DoEffect(string msg)
+    {
+        try
+        {
+            sp.Write(msg);
+        }
+        catch { }
+    }
+
     void doShit(string msg)
     {
         switch (msg)

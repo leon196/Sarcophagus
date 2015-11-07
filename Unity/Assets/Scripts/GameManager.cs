@@ -28,17 +28,21 @@ public class GameManager : MonoBehaviour {
         zapScript = myCamera.GetComponent<EffectZapping>();
     }
 	
+    void Start()
+    {
+        Sending.DoEffect("a");
+    }
+
 	// Update is called once per frame
 	void Update () 
     {
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             if (isStarted)
             {
                 //soundScript.enabled = false;
                 isStarted = false;
                 soundScript.Ending();
-                Debug.Log("lol");
                 Camera.main.transform.position = Vector3.one * 9000f;
                 Camera.main.transform.LookAt(Camera.main.transform.position + Vector3.one);
                 zapScript.Stop();
@@ -48,9 +52,13 @@ public class GameManager : MonoBehaviour {
                 timePressed = 0;
                 soundScript.source.volume = 0.1f;
             }
-
+            Sending.DoEffect("a");
         }
-        if (Input.GetKey(KeyCode.Space) && !isStarted)
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Sending.DoEffect("o");
+        }
+        if (Input.GetKey(KeyCode.LeftControl) && !isStarted)
         {
             timePressed = timePressed + Time.deltaTime;
             soundScript.source.volume = Mathf.Lerp(0.1f, 0.5f, timePressed/timeToPress);

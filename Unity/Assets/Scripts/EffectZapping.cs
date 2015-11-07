@@ -78,7 +78,7 @@ public class EffectZapping : MonoBehaviour
 
 	public void Zap ()
 	{
-        Sending.sp.Write("a");
+        Sending.sp.Write("b");
         filterList = GetComponentsInChildren<Filter>(true) as Filter[];
 		
 		foreach (Filter filter in filterList)
