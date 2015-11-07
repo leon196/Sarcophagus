@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
     public SoundManager soundScript;
     public EffectZapping zapScript;
 
+    public float timePressed = 0;
+    public float timeToPress;
     public bool isStarted = false;
 
     // Use this for initialization
@@ -29,20 +31,34 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            //soundScript.enabled = false;
-            isStarted = false;
-            soundScript.Ending();
-            Debug.Log("lol");
-            Camera.main.transform.position = Vector3.one * 9000f;
-            Camera.main.transform.LookAt(Camera.main.transform.position + Vector3.one);
-            zapScript.Stop();
+            if (isStarted)
+            {
+                //soundScript.enabled = false;
+                isStarted = false;
+                soundScript.Ending();
+                Debug.Log("lol");
+                Camera.main.transform.position = Vector3.one * 9000f;
+                Camera.main.transform.LookAt(Camera.main.transform.position + Vector3.one);
+                zapScript.Stop();
+            }
+            else
+            {
+                timePressed = 0;
+                soundScript.source.volume = 0.1f;
+            }
+
         }
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
+        if (Input.GetKey(KeyCode.Space) && !isStarted)
         {
-            isStarted = true;
-            zapScript.BeginGame();
+            timePressed = timePressed + Time.deltaTime;
+            soundScript.source.volume = Mathf.Lerp(0.1f, 0.5f, timePressed/timeToPress);
+            if (timePressed > timeToPress)
+            {
+                isStarted = true;
+                zapScript.BeginGame();
+            }
         }
 	}
 }

@@ -23,6 +23,7 @@ public class MoveCamera : MonoBehaviour
 
     public void ChangeCamera()
     {
+        Sending.sp.Write("a");
         currentTransformNumber++;
 
         if (currentTransformNumber > maxTransformNumber - 1)

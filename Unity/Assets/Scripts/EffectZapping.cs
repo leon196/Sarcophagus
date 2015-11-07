@@ -78,7 +78,8 @@ public class EffectZapping : MonoBehaviour
 
 	public void Zap ()
 	{
-		filterList = GetComponentsInChildren<Filter>(true) as Filter[];
+        Sending.sp.Write("a");
+        filterList = GetComponentsInChildren<Filter>(true) as Filter[];
 		
 		foreach (Filter filter in filterList)
 		{
@@ -121,7 +122,8 @@ public class EffectZapping : MonoBehaviour
 		filterList = GetComponentsInChildren<Filter>(true) as Filter[];
 		foreach (Filter filter in filterList)
 		{
-			Destroy(filter);
+            //Destroy(filter);
+            filter.gameObject.SetActive(false);
 		}
 	}
 
