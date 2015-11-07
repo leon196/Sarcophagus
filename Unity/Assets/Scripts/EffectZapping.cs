@@ -27,6 +27,10 @@ public class ProgressValue
 	{
 		return Mathf.Lerp(valueFrom, valueTo, GetRatio());
 	}
+	public void Debug ()
+	{
+		timeStart = Mathf.Infinity;
+	}
 }
 
 public class EffectZapping : MonoBehaviour 
@@ -50,6 +54,8 @@ public class EffectZapping : MonoBehaviour
     ProgressValue complexProgress = new ProgressValue(0.0f, 0.4f, 20f, 1f);
 	ProgressValue odysseyProgress = new ProgressValue(0.0f, 0.3f, 25f, 1f);
 	ProgressValue vortexProgress = new ProgressValue(0.0f, 0.4f, 30f, 1f);
+
+	ProgressValue meshesProgress = new ProgressValue(0.0f, 0.2f, 10f, 1f);
 	
 	// The climax
 	ProgressValue epilepsyColorProgress = new ProgressValue(0.0f, 0.6f, 60f, 1f);
@@ -74,6 +80,7 @@ public class EffectZapping : MonoBehaviour
         vortexProgress.Start();
         epilepsyColorProgress.Start();
         blankingProgress.Start();
+        meshesProgress.Start();
     }
 
 	public void Zap ()
@@ -111,6 +118,7 @@ public class EffectZapping : MonoBehaviour
 			case "RandomLine": chance = randomLineProgress.GetValue(); break;
 			case "Odyssey": chance = odysseyProgress.GetValue(); break;
 			case "Vortex": chance = vortexProgress.GetValue(); break;
+			case "Meshes": chance = meshesProgress.GetValue(); break;
 #if !UNITY_ANDROID
             case "Video": chance = videoProgress.GetValue(); break;
 #endif
@@ -125,8 +133,8 @@ public class EffectZapping : MonoBehaviour
 		filterList = GetComponentsInChildren<Filter>(true) as Filter[];
 		foreach (Filter filter in filterList)
 		{
-            Destroy(filter);
-            // filter.gameObject.SetActive(false);
+            // Destroy(filter);
+            filter.gameObject.SetActive(false);
 		}
 	}
 

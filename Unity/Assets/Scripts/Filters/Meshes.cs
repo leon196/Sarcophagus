@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 [ExecuteInEditMode]
-public class Video : MonoBehaviour 
+public class Meshes : Filter 
 {
 	Material material;
 
 	// Creates a private material used to the effect
 	void Awake ()
 	{
-		material = new Material( Shader.Find("Hidden/VideoPlayer") );
+		material = new Material( Shader.Find("Hidden/Meshes") );
 	}
 	
 	// Postprocess the image
