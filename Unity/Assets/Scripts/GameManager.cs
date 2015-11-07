@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour {
     public float timeToPress;
     public bool isStarted = false;
 
+    bool videoStart = false;
+
     // Use this for initialization
     void Awake ()
     {
@@ -55,6 +57,11 @@ public class GameManager : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.Space) && !isStarted)
         {
+            if (!videoStart)
+            {
+                videoStart = true;
+                videoPlayer.StartVideoForGame();
+            }
             timePressed = timePressed + Time.deltaTime;
             myCamera.GetComponent<AudioSource>().enabled = true;
             soundScript.source.volume = Mathf.Lerp(0.1f, 0.5f, timePressed/timeToPress);
@@ -62,7 +69,6 @@ public class GameManager : MonoBehaviour {
             {
                 isStarted = true;
                 zapScript.BeginGame();
-                videoPlayer.StartVideoForGame();
             }
         }
 	}

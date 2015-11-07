@@ -17,7 +17,7 @@
 
 		void surf (Input IN, inout SurfaceOutput o) 
 		{
-			float2 screenUV = IN.screenPos.xy / IN.screenPos.w;
+			float2 screenUV = IN.screenPos.xy;
 			o.Emission = tex2D (_MainTex, screenUV).rgb;
 		}
 		ENDCG
