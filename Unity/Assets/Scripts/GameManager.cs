@@ -10,8 +10,11 @@ public class GameManager : MonoBehaviour {
     public MoveCamera cameraScript;
     public SoundManager soundScript;
     public EffectZapping zapScript;
-	// Use this for initialization
-	void Awake ()
+
+    public bool isStarted = false;
+
+    // Use this for initialization
+    void Awake ()
     {
 	    if (instance == null)
         {
@@ -32,6 +35,11 @@ public class GameManager : MonoBehaviour {
             Camera.main.transform.position = Vector3.one * 9000f;
             Camera.main.transform.LookAt(Camera.main.transform.position + Vector3.one);
             zapScript.Stop();
+        }
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
+        {
+            isStarted = true;
+            zapScript.BeginGame();
         }
 	}
 }

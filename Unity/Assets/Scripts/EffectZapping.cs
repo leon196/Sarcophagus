@@ -37,7 +37,7 @@ public class EffectZapping : MonoBehaviour
 	ProgressValue videoProgress = new ProgressValue(1.0f, 0.6f, 0f, 30f);
 
 	// "Chill" FX
-	ProgressValue lsdColorProgress = new ProgressValue(0.0f, 0.4f, 10f, 1f);
+	ProgressValue lsdColorProgress = new ProgressValue(0.0f, 0.4f, 5f, 1f);
 	ProgressValue randomLineProgress = new ProgressValue(0.0f, 0.6f, 15f, 1f);
 	
 	// Geometry transformations
@@ -49,20 +49,24 @@ public class EffectZapping : MonoBehaviour
 	ProgressValue epilepsyColorProgress = new ProgressValue(0.0f, 0.6f, 60f, 1f);
 
 	// Kill screen and retina
-	ProgressValue blankingProgress = new ProgressValue(0.0f, 0.2f, 90f, 1f);
+	ProgressValue blankingProgress = new ProgressValue(0.0f, 0.5f, 80f, 1f);
 
 	void Start () 
 	{
 		filterList = GetComponentsInChildren<Filter>(true) as Filter[];
-		videoProgress.Start();
-		lsdColorProgress.Start();
-		randomLineProgress.Start();
-		complexProgress.Start();
-		odysseyProgress.Start();
-		vortexProgress.Start();
-		epilepsyColorProgress.Start();
-		blankingProgress.Start();
 	}
+
+    public void BeginGame()
+    {
+        videoProgress.Start();
+        lsdColorProgress.Start();
+        randomLineProgress.Start();
+        complexProgress.Start();
+        odysseyProgress.Start();
+        vortexProgress.Start();
+        epilepsyColorProgress.Start();
+        blankingProgress.Start();
+    }
 
 	public void Zap ()
 	{
@@ -81,6 +85,7 @@ public class EffectZapping : MonoBehaviour
 			newFilter.enabled = Random.Range(0f, 1f) < GetChanceFor(newFilter.GetType().ToString());
 			newFilter.Rumble();
 		}
+        Debug.Log("Bim");
 	}
 
 	float GetChanceFor (string filterName)
