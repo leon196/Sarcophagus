@@ -39,7 +39,7 @@ public class EffectZapping : MonoBehaviour
 
     // Intro video
 #if !UNITY_ANDROID
-    ProgressValue videoProgress = new ProgressValue(1.0f, 0.6f, 0f, 30f);
+    ProgressValue videoProgress = new ProgressValue(1.0f, 0.8f, 0f, 30f);
 #endif
 
     // "Chill" FX
@@ -48,7 +48,7 @@ public class EffectZapping : MonoBehaviour
 	ProgressValue randomLineProgress = new ProgressValue(0.0f, 0.6f, 10f, 1f);
 #else
     ProgressValue lsdColorProgress = new ProgressValue(0.0f, 0.4f, 5f, 1f);
-    ProgressValue randomLineProgress = new ProgressValue(0.0f, 0.6f, 15f, 1f);
+    ProgressValue randomLineProgress = new ProgressValue(0.0f, 0.4f, 15f, 1f);
 #endif
     // Geometry transformations
     ProgressValue complexProgress = new ProgressValue(0.0f, 0.4f, 20f, 1f);
@@ -85,7 +85,7 @@ public class EffectZapping : MonoBehaviour
 
 	public void Zap ()
     {
-        if (Random.value>0.50f)
+        if (Random.value>0.75f)
             Sending.DoEffect("t");
         else
             Sending.DoEffect("b");

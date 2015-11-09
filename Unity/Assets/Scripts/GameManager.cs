@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour {
             }
             else
             {
+                Application.LoadLevel(0);
                 timePressed = 0;
                 soundScript.source.volume = 0.1f;
             }
